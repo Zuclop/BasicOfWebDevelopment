@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <script>
+        function sendRequest(type) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open(type, '/Home/DoSomething', true);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4) {
+                    if (xmlhttp.status == 200) {
+                        document.getElementById('Text').innerHTML = xmlhttp.responseText;
+                    }
+                    else
+                    {
+                        document.getElementById('Text').innerHTML = xmlhttp.status;
+                    }
+                }
+            };
+            xmlhttp.send(null);
+    }
+    </script>
+    <div> 
+        <div id="Text">
+        </div>
+        <input type="button" onclick="sendRequest('GET')" value="Get" />
+        <input type="button" onclick="sendRequest('POST')" value="Post" />
+        <input type="button" onclick="sendRequest('PUT')" value="Put" />
+        <input type="button" onclick="sendRequest('DELETE')" value="Delete" />
+    </div>
+</body>
+</html>
